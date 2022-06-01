@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Form from "./components/Form";
 import { User } from "./interfaces/User";
 
 interface AppProps {
@@ -32,6 +33,8 @@ function App({ headerText, extraText, subText = "How are you?" }: AppProps) {
 
       <button onClick={fetchUser}>Fetch user on click</button>
       {user && <p>Hello, {user.name}!</p>}
+
+      <Form />
     </>
   );
 }
