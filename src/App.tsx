@@ -9,7 +9,10 @@ interface AppProps {
   subText?: string;
 }
 
+type CheckoutStep = "Details" | "Shipping" | "Payment";
+
 function App({ headerText, extraText, subText = "How are you?" }: AppProps) {
+  const [checkoutStep, setCheckoutStep] = useState<CheckoutStep>("Details");
   const [user, setUser] = useState<User | null>(null);
   const { state, dispatch } = useContext(InputValueContext);
 
@@ -42,6 +45,24 @@ function App({ headerText, extraText, subText = "How are you?" }: AppProps) {
       <button onClick={() => dispatch({ type: "SET_INPUT_VALUE_TO_100" })}>
         SET VALUE TO 100
       </button>
+
+      {checkoutStep === "Details" && (
+        <>
+          <h1>Details</h1>
+          <button type="button" onClick={() => setCheckoutStep("Shipping")}>
+            Next
+          </button>
+        </>
+      )}
+      {checkoutStep === "Shipping" && (
+        <>
+          <h1>Shipping</h1>
+          <button type="button" onClick={() => setCheckoutStep("Payment")}>
+            Next
+          </button>
+        </>
+      )}
+      {checkoutStep === "Payment" && <h1>Payment</h1>}
     </>
   );
 }
